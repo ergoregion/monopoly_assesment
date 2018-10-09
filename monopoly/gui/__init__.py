@@ -1,0 +1,1 @@
+from .monopolywidget import MonopolyWidget
