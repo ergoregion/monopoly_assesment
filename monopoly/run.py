@@ -8,8 +8,8 @@ from monopoly.gui import MonopolyWidget
 
 def main():
     app = QApplication(sys.argv)
-    w = MonopolyWidget(None)
     i = MonopolyModel()
+    w = MonopolyWidget(None, i.sites)
     w.show()
     sys.exit(app.exec_())
 
