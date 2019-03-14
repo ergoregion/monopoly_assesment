@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class MonopolyMarkerWidget(QtWidgets.QWidget):
     def __init__(self, parent):
         QtWidgets.QWidget.__init__(self, parent)
@@ -8,6 +9,14 @@ class MonopolyMarkerWidget(QtWidgets.QWidget):
         self.label = QtWidgets.QLabel('Test', self)  # test, if it's really backgroundimage
         self.label.setGeometry(0, 0, 30, 30)
         self.label.setStyleSheet("background-color: rgb(255, 255, 255);")
+
+    def set_text(self, text):
+        self.label.setText(text)
+
+    def set_value(self, i, max):
+        i = 100+int(i/max*155)
+        self.label.setStyleSheet("background-color: rgb({}, 100, 100);".format(i))
+
 
 
 class MonopolyWidget(QtWidgets.QWidget):
@@ -22,9 +31,14 @@ class MonopolyWidget(QtWidgets.QWidget):
         palette.setBrush(10, QtGui.QBrush(sImage))  # 10 = Windowrole
         self.setPalette(palette)
 
-        markers = {}
+        self.markers = {}
 
         for f in flags:
-            markers[f] = MonopolyMarkerWidget(self)
-            markers[f].setGeometry(f.x, f.y,30,30)
+            self.markers[f] = MonopolyMarkerWidget(self)
+            self.markers[f].setGeometry(f.x - 15, f.y - 15, 30, 30)
 
+    def set_values(self, values):
+        m = max(values.values())
+        for f in values:
+            self.markers[f].set_text(str(values[f]))
+            self.markers[f].set_value(values[f], m)
