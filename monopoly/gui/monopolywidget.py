@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from monopoly.gui.locations import locations
 
 
 class MonopolyMarkerWidget(QtWidgets.QWidget):
@@ -35,7 +36,7 @@ class MonopolyWidget(QtWidgets.QWidget):
 
         for f in flags:
             self.markers[f] = MonopolyMarkerWidget(self)
-            self.markers[f].setGeometry(f.x - 15, f.y - 15, 30, 30)
+            self.markers[f].setGeometry(locations[f][0] - 15, locations[f][1] - 15, 30, 30)
 
     def set_values(self, values):
         m = max(values.values())

@@ -1,11 +1,11 @@
-from .site import sites
+from .sites import MonopolySite
 from .state import MonopolyState
 import numpy as np
 
 
 class MonopolyModel(object):
     def __init__(self):
-        self.sites = sites()
+        self.sites = [s for s in MonopolySite]
         self._prepare_states()
         self.dof = len(self.states)
 
@@ -15,7 +15,7 @@ class MonopolyModel(object):
 
     def _prepare_states(self):
         # board position only
-        self.states = [MonopolyState(s) for s in sites()]
+        self.states = [MonopolyState(s) for s in self.sites]
 
     def _prepare_transmission_matrix(self):
         # stay where you are
