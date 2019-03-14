@@ -3,11 +3,11 @@ from monopoly.gui.locations import locations
 
 
 class MonopolyMarkerWidget(QtWidgets.QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent, name):
         QtWidgets.QWidget.__init__(self, parent)
         self.setFixedSize(30, 30)
 
-        self.label = QtWidgets.QLabel('Test', self)  # test, if it's really backgroundimage
+        self.label = QtWidgets.QLabel(name, self)  # test, if it's really backgroundimage
         self.label.setGeometry(0, 0, 30, 30)
         self.label.setStyleSheet("background-color: rgb(255, 255, 255);")
 
@@ -35,7 +35,7 @@ class MonopolyWidget(QtWidgets.QWidget):
         self.markers = {}
 
         for f in flags:
-            self.markers[f] = MonopolyMarkerWidget(self)
+            self.markers[f] = MonopolyMarkerWidget(self, f.name)
             self.markers[f].setGeometry(locations[f][0] - 15, locations[f][1] - 15, 30, 30)
 
     def set_values(self, values):

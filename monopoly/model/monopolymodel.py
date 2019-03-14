@@ -1,5 +1,5 @@
 from .sites import MonopolySite
-from .state import MonopolyState
+from .state import MonopolyState, StateVariation
 import numpy as np
 
 
@@ -15,7 +15,7 @@ class MonopolyModel(object):
 
     def _prepare_states(self):
         # board position only
-        self.states = [MonopolyState(s) for s in self.sites]
+        self.states = [MonopolyState(s, StateVariation.FINISHED) for s in self.sites]
 
     def _prepare_transmission_matrix(self):
         # stay where you are
